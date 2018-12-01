@@ -1,0 +1,224 @@
+\documentclass{article}
+     \usepackage[final]{nips_2018}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}
+\usepackage{hyperref}
+\title{Different classifiers performance on two datasets}
+\usepackage{fourier} 
+\usepackage{makecell}
+
+
+\author{%
+  \textbf{Ahmed Amine Daou},  \texttt{hippo@cs.cranberry-lemon.edu}\\
+  \textbf{Alejandra Jimenez},  \texttt{hippo@cs.cranberry-lemon.edu}\\
+  \textbf{Gabriel Lagubeau},  \texttt{hippo@cs.cranberry-lemon.edu}\\
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  In machine learning context theres is many algorithms to handle  classification problems, Algorithms accuracy depends mainly on dataset applied thereto.  In this paper, We'll describe classifiers behavious: Multilayer perceptron (MLP); Random
+Forest (RF); Naive Bayes and other algorithms that outperformed our 3 chosen algorithms. We choose two datasets: \href{https://www.cs.toronto.edu/~kriz/cifar.html}{CIFAR-10} and \href{https://archive.ics.uci.edu/ml/datasets/adult}{Adult Dataset}. for CIFAR-10 pre-processing phase, to improve accuracy
+we applied Principal Component Analysis (PCA), and for Adult dataset we applied \textcolor{red}{alejandra apres}. After that, we evaluate and compare the performance of the models according to the specific metrics including accuracy, confusion matrix, cost-sensitive measure and computation runtime. As result we found that ... outperformed in CIFAR-10 with an accuracy blabla, and \textcolor{red}{algo x } gave the best result with \%
+\end{abstract}
+
+\section{Approach}
+There is many approaches for images classification. The first step is the redefinition of the problem in a machine learning context, after that we'll be able to know what every chosen algorithm needs to run properly.  The  next  step
+is  to apply pre processing methods on our dataset,  doing so we'll extract a maximum of valuable information and make the classification accuracy evolve.
+on a "cleaned" dataset,  we can apply  a  plenty  of 
+learning algorithms to extract a maximum from our features    and improve their accuracy during the testing phase.
+
+
+ \subsection{Chosen Dataset description}
+\begin{itemize}
+\item \href{https://www.cs.toronto.edu/~kriz/cifar.html}{The CIFAR-10 dataset}
+: A 10-class (airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck ) database of  60000 32x32 pixels images ,50000 for training divided and 10000 for testing selected randomly from each class.
+\item \href{http://archive.ics.uci.edu/ml/datasets/Adult}{Adult Data Set} : Used to predict whether a person makes over 50K a year, relying on 48842 instances (32561 for training and 16281 for testing)  having 14 attributes .\end{itemize}
+
+
+\subsection{Chosen Classifiers}
+\begin{itemize}
+\item \textbf{Multilayer Perceptron:}\\\\
+A Multilayer Perceptron (MLP) is a neural network that generates a set of outputs from a set of inputs. it consists of layers connected in one-way graph where Each node of hidden \& output layers has a non linear activation function. In MLP we use backpropagation as a supervised learning technique.
+\item \textbf{Naive Bayes:}\\\\
+A naive Bayes classifier is an algorithm that uses Bayes' probability theorem to classify data, what makes it different is that the probability of an event can be adjusted as new data is introduced. 
+\item \textbf{Random Forest}\\\\
+Random forests algorithm operates by constructing a number of decision trees during the training on different data subsets, then outputs class mode in classification case, or mean prediction in regression case of the individual trees.This algorithm combines the concepts of random subspaces and bagging.
+\end{itemize}
+\subsection{Extra Classifiers}
+\begin{itemize}
+\item \textbf{Convolutional Neural Network}: is known to be efficient in image classification task, so we added it as one more element to compare our classifiers performance.
+\end{itemize}
+\section{Methods}
+\subsection{Preprocessing}
+
+\begin{table}[!h]
+\begin{tabular}{| c | L{5cm} | L{5cm} | }
+Preprocessing Method &
+\textbf{CIFAR-10:}\newline 
+\textbf{PCA} description\newline
+ \textbf{one-hot encoding}   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+& \textbf{Adult Database:}\newline  \\
+\end{tabular}
+
+\end{table}
+  
+
+
+
+\subsection{Classifiers}
+\subsubsection{For CIFAR-10:}
+
+\subsubsection{For Adult dataset:}
+
+
+
+
+
+
+
+
+\section{Experiments}
+\subsection{On CIFAR-10}
+\subsection{On Adult dataset}
+
+
+\section{Results}
+
+\section{Performance comparison}
+\label{others}
+
+=previous work of Jones et al.\ [4],'' not ``In our
+previous work [4].'' If you cite your other papers that are not widely available
+(e.g., a journal paper under review), use anonymous author names in the
+citation, e.g., an author of the form ``A.\ Anonymous.''
+
+\subsection{Footnotes}
+
+Footnotes should be used sparingly.  If you do require a footnote, indicate
+footnotes with a number\footnote{Sample of the first footnote.} in the
+text. Place the footnotes at the bottom of the page on which they appear.
+Precede the footnote with a horizontal rule of 2~inches (12~picas).
+
+Note that footnotes are properly typeset \emph{after} punctuation
+marks.\footnote{As in this example.}
+
+
+
+All artwork must be neat, clean, and legible. Lines should be dark enough for
+purposes of reproduction. The figure number and caption always appear after the
+figure. Place one line space before the figure caption and one line space after
+the figure. The figure caption should be lower case (except for first word and
+proper nouns); figures are numbered consecutively.
+
+You may use color figures.  However, it is best for the figure captions and the
+paper body to be legible if the paper is printed in either black/white or in
+color.
+
+
+
+\begin{table}
+  \caption{Sample table title}
+  \label{sample-table}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \multicolumn{2}{c}{Part}                   \\
+    \cmidrule(r){1-2}
+    Name     & Description     & Size ($\mu$m) \\
+    \midrule
+    Dendrite & Input terminal  & $\sim$100     \\
+    Axon     & Output terminal & $\sim$10      \\
+    Soma     & Cell body       & up to $10^6$  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+should not forget this\\
+Which algorithm is theoretically more likely to overfit? What happens in practice?
+•
+What prior assumptions are encoded by your chosen algorithms? Are these ’good’ assump-
+tions?
+•
+Compare the performance (accuracy, log-likelihood...) of the different algorithms on each
+dataset. Is one consistently better than others? Why?
+•
+Explore your data - provide simple statistics and/or analysis like the mean, variance, (possibly
+over different features), visualizations of how features vary over classes, etc. Do any of these
+properties help explain different algorithms’ performance? Compare statistics between your
+datasets - is one more balanced than another? Is this a good thing?
+•
+What properties lead to different algorithms’ performance? How robust is their performance;
+what would cause it to degrade?
+•
+What have you learned about your data? What real-world problems could your insights be
+useful for? In what ways is your data representative of a real-world problem, and it what
+ways is it not?
+•
+Do you have any recommendations for someone faced with this real-world problem? (Sug-
+gested algorithm/hyperparameters, data collection methods, etc.)
+•
+Provide qualitative analysis of performance - show examples that the algorithm fails on, and
+examples of successes. Are the ’hard’ and ’easy’ examples in the dataset the same for different
+algorithms?
+•
+What are some other phenomena or interesting questions you would recommend for further
+work/experiments?
+\subsection*{Acknowledgments}
+
+Use unnumbered third level headings for the acknowledgments. All acknowledgments
+go at the end of the paper. Do not include acknowledgments in the anonymized
+submission, only in the final paper.
+
+\section*{References}
+
+References follow the acknowledgments. Use unnumbered first-level heading for
+the references. Any choice of citation style is acceptable as long as you are
+consistent. It is permissible to reduce the font size to \verb+small+ (9 point)
+when listing the references. {\bf Remember that you can use more than eight
+  pages as long as the additional pages contain \emph{only} cited references.}
+\medskip
+
+\small
+
+[1] Alexander, J.A.\ \& Mozer, M.C.\ (1995) Template-based algorithms for
+connectionist rule extraction. In G.\ Tesauro, D.S.\ Touretzky and T.K.\ Leen
+(eds.), {\it Advances in Neural Information Processing Systems 7},
+pp.\ 609--616. Cambridge, MA: MIT Press.
+
+[2] Bower, J.M.\ \& Beeman, D.\ (1995) {\it The Book of GENESIS: Exploring
+  Realistic Neural Models with the GEneral NEural SImulation System.}  New York:
+TELOS/Springer--Verlag.
+
+[3] Hasselmo, M.E., Schnell, E.\ \& Barkai, E.\ (1995) Dynamics of learning and
+recall at excitatory recurrent synapses and cholinergic modulation in rat
+hippocampal region CA3. {\it Journal of Neuroscience} {\bf 15}(7):5249-5262.
+http://www.visiondummy.com/2014/05/feature-extraction-using-pca/
+https://www.techopedia.com/definition/32509/principal-component-analysis-pca
+\end{document}
