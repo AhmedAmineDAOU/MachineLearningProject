@@ -1,12 +1,20 @@
 \documentclass{article}
      \usepackage[final]{nips_2018}
-
+\usepackage[dvipsnames]{xcolor}
 \usepackage{array}
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{tabularx}% added for table design
+\usepackage{lipsum}% for dummy text
 
-
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\setlength{\belowcaptionskip}{0.0pt}
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
@@ -19,30 +27,34 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \title{Different classifiers performance on two datasets}
-\usepackage{fourier} 
-\usepackage{makecell}
-
+\usepackage{placeins}
+\usepackage{color, colortbl}
+\definecolor{Gray}{rgb}{0.88,10,1}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
 
 \author{%
-  \textbf{Ahmed Amine Daou},  \texttt{hippo@cs.cranberry-lemon.edu}\\
-  \textbf{Alejandra Jimenez},  \texttt{hippo@cs.cranberry-lemon.edu}\\
-  \textbf{Gabriel Lagubeau},  \texttt{hippo@cs.cranberry-lemon.edu}\\
+  \textbf{Ahmed Amine Daou},  \texttt{\href{mailto:ahmed.aminedaou@umontreal.ca}{ahmed.amine.daou@umontreal.ca}} \\  
+  \textbf{Alejandra Jimenez}, \texttt{\href{mailto:alejandra.jimenez.nieto@umontreal.ca}{alejandra.jimenez.nieto@umontreal.ca}} \\
+  \textbf{Gabriel Lagubeau}, \texttt{\href{mailto:gabriel.lagubeau@umontreal.ca}{gabriel.lagubeau@umontreal.ca}} 
 }
-
 \begin{document}
-\maketitle
 
+
+
+\maketitle
 \begin{abstract}
-  In machine learning context theres is many algorithms to handle  classification problems, Algorithms accuracy depends mainly on dataset applied thereto.  In this paper, We'll describe classifiers behavious: Multilayer perceptron (MLP); Random
-Forest (RF); Naive Bayes and other algorithms that outperformed our 3 chosen algorithms. We choose two datasets: \href{https://www.cs.toronto.edu/~kriz/cifar.html}{CIFAR-10} and \href{https://archive.ics.uci.edu/ml/datasets/adult}{Adult Dataset}. for CIFAR-10 pre-processing phase, to improve accuracy
+  In machine learning context theres is many algorithms to handle  classification problems, Algorithms accuracy depends mainly on dataset applied thereto. In this paper, We'll describe different classifiers' behaviour : Multilayer perceptron (MLP); Random
+Forests (RF) and Naive Bayes. We choose two datasets: \href{https://www.cs.toronto.edu/~kriz/cifar.html}{CIFAR-10} and \href{https://archive.ics.uci.edu/ml/datasets/adult}{Adult Dataset}. for CIFAR-10 pre-processing phase, to improve accuracy
 we applied Principal Component Analysis (PCA), and for Adult dataset we applied \textcolor{red}{alejandra apres}. After that, we evaluate and compare the performance of the models according to the specific metrics including accuracy, confusion matrix, cost-sensitive measure and computation runtime. As result we found that ... outperformed in CIFAR-10 with an accuracy blabla, and \textcolor{red}{algo x } gave the best result with \%
 \end{abstract}
 
 \section{Approach}
-There is many approaches for images classification. The first step is the redefinition of the problem in a machine learning context, after that we'll be able to know what every chosen algorithm needs to run properly.  The  next  step
+There is many approaches for images classification. The first step is the redefinition of the problem in a machine learning context, after that we'll be able to know what every chosen algorithm needs to run properly. The  next  step
 is  to apply pre processing methods on our dataset,  doing so we'll extract a maximum of valuable information and make the classification accuracy evolve.
-on a "cleaned" dataset,  we can apply  a  plenty  of 
-learning algorithms to extract a maximum from our features    and improve their accuracy during the testing phase.
+On a "well pre processed" dataset,  we can apply  a  plenty  of 
+learning algorithms to extract a maximum of valuable information from our features which improve algorithms' accuracy during the testing phase.
 
 
  \subsection{Chosen Dataset description}
@@ -52,149 +64,287 @@ learning algorithms to extract a maximum from our features    and improve their 
 \item \href{http://archive.ics.uci.edu/ml/datasets/Adult}{Adult Data Set} : Used to predict whether a person makes over 50K a year, relying on 48842 instances (32561 for training and 16281 for testing)  having 14 attributes .\end{itemize}
 
 
-\subsection{Chosen Classifiers}
-\begin{itemize}
-\item \textbf{Multilayer Perceptron:}\\\\
-A Multilayer Perceptron (MLP) is a neural network that generates a set of outputs from a set of inputs. it consists of layers connected in one-way graph where Each node of hidden \& output layers has a non linear activation function. In MLP we use backpropagation as a supervised learning technique.
-\item \textbf{Naive Bayes:}\\\\
-A naive Bayes classifier is an algorithm that uses Bayes' probability theorem to classify data, what makes it different is that the probability of an event can be adjusted as new data is introduced. 
-\item \textbf{Random Forest}\\\\
-Random forests algorithm operates by constructing a number of decision trees during the training on different data subsets, then outputs class mode in classification case, or mean prediction in regression case of the individual trees.This algorithm combines the concepts of random subspaces and bagging.
-\end{itemize}
-\subsection{Extra Classifiers}
-\begin{itemize}
-\item \textbf{Convolutional Neural Network}: is known to be efficient in image classification task, so we added it as one more element to compare our classifiers performance.
-\end{itemize}
+
 \section{Methods}
+The main purpose is to implement and compare the performance of three classifiers. On each dataset, we applied Naive Bayes, and random forests, then a multilayer perceptron. After that, we performed hyper-parameters and PCA number of components tuning. The evaluation is based on precision, recall, f1-score values and confusion matrix.
+\subsection{Naive Bayes:}
+Naive Bayes methods are a set of supervised learning algorithms based on Bayes Theorem, known for being very naive and having a very low capacity because of supposing that features $X$ belonging to the same given class $c\in \{1,\hdots ,m\}$ are independent.
+
+
+\subsection{Random Forests:}
+Random  Forests (RF)  is  a model that fits decision trees on sampled dataset, $dimension_{sample}=dimension_{input}$. Trees are constructed with A recursive, top-down procedure that builds a tree before being pruned back to avoid overfitting.
+its classification process, can be seen as a set of comparison (tests on features values) at every internal node.\\
+
+
+\subsection{Multilayer perceptron:}
+A multilayer perceptron is a one-way artificial neural network, it's a supervised machine learning algorithm, its modeling is based on human brain architecture.
+Neurons are embedded into layers fully connected to each other. The first layer is composed of feature vector and called the input layer, The output layer is the component that gives the prediction, between them there's at least one hidden layer.
+Hidden and output layers take $X$ as input and outputs $h_{W,b}$ where $W$ is the weights set and $b$ is the bias. 
+$$h_{W,b}\left(X\right)=f\left(z\right)\; ; z=\sum_{i=1}^{n} W_ix_i+b$$
+among many common activation function $f$ we'll use relu for hidden layers and softmax for output layer $$Relu\left(\mathbf{z}_j\right)=max\left(z_j,0\right)$$  
+$$softmax\left(\mathbf{z}_j\right) = \frac{e^{z_j}}{\sum_{j=1}^k e^{z_k}}$$  $k$ here represents,the output layer dimension, or the number of possible classes.
+\subsubsection*{Cross entropy loss:} Loss function used in ANN having $softmax$ as an activation function is cross Entropy loss, it indicates the difference between what the model believes and what real value is equal to.
+$$L = - \sum_i y_i log(p_i) $$
+If this loss function is non-convex it makes finding optimal values impossible sometimes, but it usually gives good results.
+
+Weights which are initialized to low values are updated during backpropagation.\\
+Hyper parameters are responsible of the algorithm behaviour.
+
+\begin{itemize}
+\item A high learning rate can make backpropagation algorithm jump around optimal values without getting them and  a one size makes backpropagation converges slowly.
+\item A High iteration number can cause overfitting , and a low one causes underfitting.
+\end{itemize}
+
+
+
+
 \subsection{Preprocessing}
 
-\begin{table}[!h]
-\begin{tabular}{| c | L{5cm} | L{5cm} | }
-Preprocessing Method &
-\textbf{CIFAR-10:}\newline 
-\textbf{PCA} description\newline
- \textbf{one-hot encoding}   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-& \textbf{Adult Database:}\newline  \\
-\end{tabular}
-
-\end{table}
-  
 
 
-
-\subsection{Classifiers}
-\subsubsection{For CIFAR-10:}
-
-\subsubsection{For Adult dataset:}
-
-
-
-
-
-
-
-
-\section{Experiments}
-\subsection{On CIFAR-10}
-\subsection{On Adult dataset}
-
-
-\section{Results}
-
-\section{Performance comparison}
-\label{others}
-
-=previous work of Jones et al.\ [4],'' not ``In our
-previous work [4].'' If you cite your other papers that are not widely available
-(e.g., a journal paper under review), use anonymous author names in the
-citation, e.g., an author of the form ``A.\ Anonymous.''
-
-\subsection{Footnotes}
-
-Footnotes should be used sparingly.  If you do require a footnote, indicate
-footnotes with a number\footnote{Sample of the first footnote.} in the
-text. Place the footnotes at the bottom of the page on which they appear.
-Precede the footnote with a horizontal rule of 2~inches (12~picas).
-
-Note that footnotes are properly typeset \emph{after} punctuation
-marks.\footnote{As in this example.}
-
-
-
-All artwork must be neat, clean, and legible. Lines should be dark enough for
-purposes of reproduction. The figure number and caption always appear after the
-figure. Place one line space before the figure caption and one line space after
-the figure. The figure caption should be lower case (except for first word and
-proper nouns); figures are numbered consecutively.
-
-You may use color figures.  However, it is best for the figure captions and the
-paper body to be legible if the paper is printed in either black/white or in
-color.
-
-
-
-\begin{table}
-  \caption{Sample table title}
+\FloatBarrier
+\begin{table}[!htbp]
+ \centering
+  \caption{Preprocessing methods applied on each datasets}
   \label{sample-table}
-  \centering
-  \begin{tabular}{lll}
+  
+  \begin{tabular}{lcl}
+  
     \toprule
-    \multicolumn{2}{c}{Part}                   \\
+    \multicolumn{2}{c}{CIFAR-10}                   \\
     \cmidrule(r){1-2}
-    Name     & Description     & Size ($\mu$m) \\
+    Preprocessing method     & Description      \\
     \midrule
-    Dendrite & Input terminal  & $\sim$100     \\
-    Axon     & Output terminal & $\sim$10      \\
-    Soma     & Cell body       & up to $10^6$  \\
+    \rowcolor{Gray}
+    Features scaling &   \makecell{Each image is represented in a 3 dimensional  RGB vetor, each value is between 0 \& 255,\\ by deviding each value by 255 we'll get values between 0 \& 1. }   \\
+    PCA    & \makecell{Principal components analysis is a famous method used to reduce dimentionality \\by projecting features in a n-dimentional space it's used in some cases for image denoising. }   \\
+     \rowcolor{Gray}
+    One-hot encoding      & \makecell{Training and testing labels are 1-dimensional vectors, $\left(50000,1\right)$ for training  \& $\left(10000,1\right)$ \\for testing. \textbf{MLP} output layer activation function is softmax, so to make the\\ cross entropy calculation possible,  each training label should be \\a $Classes_{number}$-dimentional vector, the result is a vector representing\\ having a unique $1$ in corresponding class index\\  }    \\
+    
+     \toprule
+    \multicolumn{2}{c}{Adult dataset}                   \\
+    \cmidrule(r){1-2}
+    Preprocessing method     & Description      \\
+    \midrule
+    Dendrite & Input terminal      \\
+    Axon     & Output terminal    \\
+    Soma     & Cell body        \\
     \bottomrule
   \end{tabular}
 \end{table}
+\subsection{Design choices}
+\begin{itemize}
+\item The chosen language is Python, and the libraries used are:
+\item Instead of downloading the Cifar data and load it from the disk, we imported it using keras function $cifar10.load\_data\left(\right)$
+\item Classifiers are implemented in separate jupyter notebooks.
+\end{itemize}
+
+\section{Experiments, Results \& Comparision}
 
 
-should not forget this\\
-Which algorithm is theoretically more likely to overfit? What happens in practice?
-•
-What prior assumptions are encoded by your chosen algorithms? Are these ’good’ assump-
-tions?
-•
-Compare the performance (accuracy, log-likelihood...) of the different algorithms on each
-dataset. Is one consistently better than others? Why?
-•
-Explore your data - provide simple statistics and/or analysis like the mean, variance, (possibly
-over different features), visualizations of how features vary over classes, etc. Do any of these
-properties help explain different algorithms’ performance? Compare statistics between your
-datasets - is one more balanced than another? Is this a good thing?
-•
-What properties lead to different algorithms’ performance? How robust is their performance;
-what would cause it to degrade?
-•
-What have you learned about your data? What real-world problems could your insights be
-useful for? In what ways is your data representative of a real-world problem, and it what
-ways is it not?
-•
-Do you have any recommendations for someone faced with this real-world problem? (Sug-
-gested algorithm/hyperparameters, data collection methods, etc.)
-•
-Provide qualitative analysis of performance - show examples that the algorithm fails on, and
-examples of successes. Are the ’hard’ and ’easy’ examples in the dataset the same for different
-algorithms?
-•
-What are some other phenomena or interesting questions you would recommend for further
-work/experiments?
+In the next table we'll show the pre processing impact on algorithms' accuracy and execution time, the table is displayed for illustrative purpose and the values  here are not the optimal obtained values.
+it does not take account of PCA fitting execution time.
+
+
+
+
+\begin{table}[ht]
+  \caption{ Pre processing Method influence on each classifier}
+  \label{sample-table}
+  \centering
+  \begin{tabular}{lccll}
+    \toprule
+    \multicolumn{5}{c}{CIFAR-10}                   \\
+    \cmidrule(r){1-5}
+    Classifier details     & Features Scaling   &  PCA & Execution time & Accuracy \\
+    \midrule
+    Multilayer Perceptron &   \xmark  & \xmark & $543.3s$ & $10\%$  \\
+    
+ PCA components=100   & \checkmark & \xmark  &$581.8s\left(\textcolor{red}{+38s}\right)$ & $39.04\% \left(\textcolor{ForestGreen}{+29.04\%}\right)$ \\  
+      & \xmark & \checkmark & $168.7s\left(\textcolor{ForestGreen}{-413,1s}\right)$ & $25.69\% \left(\textcolor{red}{-13.35\%}\right)$ \\  
+     & \checkmark & \checkmark & $146.6s \left(\textcolor{ForestGreen}{-22.1s}\right)$  & $57.63\% \left(\textcolor{ForestGreen}{+31.94\%}\right)$ \\      
+      
+      \toprule
+  
+   Naive Bayes(Gaussian) &   \xmark  & \xmark &  7.9s &  31\%  \\
+ PCA components=40   & \checkmark & \xmark  & $6.8s\left(\textcolor{ForestGreen}{-1.1s}\right)$& 31\% \\  
+      & \xmark & \checkmark &$0.1s\left(\textcolor{ForestGreen}{-6.7s}\right)$ & $36\% \left(\textcolor{ForestGreen}{+5\%}\right)$\\  
+     & \checkmark & \checkmark &0.1s  &36 \% \\ 
+ %$ 25.69\% \left( −13.35s \right)$ 
+     \toprule
+  
+   Random Forests &   \xmark  & \xmark & $75.0s$ & $40.11\%$ \\
+$n\_estimators=20$    & \checkmark & \xmark  & $72.0s\left(\textcolor{ForestGreen}{-3s}\right)$ &  $39.9\% \left(\textcolor{red}{-0.21\%}\right)$\\  
+PCA components=40      & \xmark & \checkmark & $22.9s \left(\textcolor{ForestGreen}{-49.1s}\right)$ & $36.89\% \left(\textcolor{red}{-3.01\%}\right)$ \\  
+     & \checkmark & \checkmark & $20.4s\left(\textcolor{ForestGreen}{-2.5s}\right)$ & $37.6\% \left(\textcolor{ForestGreen}{+0.71\%}\right)$\\ 
+    \bottomrule
+    \multicolumn{5}{c}{Adult Database}                   \\
+    \cmidrule(r){1-5}
+    Classifier     & Mthod1   &  Method2 & Execution Time & Accuracy \\
+    \midrule
+    Multilayer Perceptron &   \xmark  & \xmark & &  \\
+    & \checkmark & \xmark  & &  \\  
+      & \xmark & \checkmark & &  \\  
+     & \checkmark & \checkmark & & \\      
+      
+      \toprule
+  
+   Naive Bayes &   \xmark  & \xmark & &  \\
+    & \checkmark & \xmark  & &  \\  
+      & \xmark & \checkmark & &  \\  
+     & \checkmark & \checkmark & & \\ 
+ 
+     \toprule
+  
+   Random Forests &   \xmark  & \xmark & &  \\
+    & \checkmark & \xmark  & &  \\  
+      & \xmark & \checkmark & &  \\  
+     & \checkmark & \checkmark & & \\ 
+    \bottomrule
+  \end{tabular}
+\end{table}
+\FloatBarrier
+\subsection{On CIFAR-10}
+\subsubsection*{Hyper parameter tuning:}
+
+
+In the next part we'll show the best results obtained for each classifier after model optimization using grid search.\textcolor{red}{(pas oublier) trouver des reponses à quelques questions}
+\subsubsection{Multilayer Perceptron}
+He we tuned learining rate  $\eta \in \{1,0.1,0.01,0.001\}$ \& epochs number in
+$nb_{iteration} \in \{100,200,300,400\}$\textcolor{red}{<-a determiner}
+\subsubsection{Naive Bayes}
+Here we have no hyperparameter to tune so we tried different distribution (Gaussian, Multinomial \& Bernoulli ).
+\begin{itemize}
+\item \textbf{Gaussian Distribution: }
+
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.6\columnwidth}
+        \includegraphics[width=\linewidth]{index}
+  
+    \end{subfigure}
+
+    \bigskip% <-- added
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \renewcommand\tabularxcolumn[1]{m{#1}}% <-- added
+        \renewcommand\arraystretch{1}
+        \setlength\tabcolsep{2pt}% <-- added
+        \begin{tabularx}{\linewidth}{*{6}{>{\centering\arraybackslash}X}}\hline
+     &  & precision &   recall & f1-score  & support \\ \hline
+                  
+  \multicolumn{2}{c}{avg / total}& 0.37  &     0.37   &  0.36   &   10000 \\
+  \end{tabularx}
+     
+        \caption{Gaussian Naive Bayes classification report  }
+    \end{subfigure}
+
+    \label{my label}
+\end{figure}
+\FloatBarrier
+
+\item \textbf{Multinomial Distribution: }
+
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.6\columnwidth}
+        \includegraphics[width=\linewidth]{multi}
+  
+    \end{subfigure}
+
+    \bigskip% <-- added
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \renewcommand\tabularxcolumn[1]{m{#1}}% <-- added
+        \renewcommand\arraystretch{1}
+        \setlength\tabcolsep{2pt}% <-- added
+        \begin{tabularx}{\linewidth}{*{6}{>{\centering\arraybackslash}X}}\hline
+     &  & precision &   recall & f1-score  & support \\ \hline
+                  
+  \multicolumn{2}{c}{avg / total}& 0.30   &   0.30    &  0.30   &  10000
+  \end{tabularx}
+     
+        \caption{Multinomial Naive Bayes classification report  }
+    \end{subfigure}
+
+    \label{my label}
+\end{figure}
+\FloatBarrier
+
+
+
+\item \textbf{Bernoulli Distribution: }
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.6\columnwidth}
+        \includegraphics[width=\linewidth]{Bernoui}
+  
+    \end{subfigure}
+
+    \bigskip% <-- added
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \renewcommand\tabularxcolumn[1]{m{#1}}% <-- added
+        \renewcommand\arraystretch{1}
+        \setlength\tabcolsep{1pt}% <-- added
+        \begin{tabularx}{\linewidth}{*{6}{>{\centering\arraybackslash}X}}\hline
+     &  & precision &   recall & f1-score  & support \\ \hline
+                  
+  \multicolumn{2}{c}{avg / total}& 0.30    &  0.30  &    0.30  &   10000
+  \end{tabularx}
+     
+        \caption{Bernoulli Naive Bayes classification report  }
+    \end{subfigure}
+
+    \label{my label}
+\end{figure}
+\FloatBarrier
+
+
+\end{itemize}
+
+
+\subsubsection{Random Forests}
+RF we tuned nEstimators with these values $\{25,50,100,150,200,250\}$ and pca components in $\{\hdots\}$
+\begin{figure}[ht]
+    \centering
+        \centering
+        \renewcommand\tabularxcolumn[1]{m{#1}}% <-- added
+        \renewcommand\arraystretch{1}
+        \setlength\tabcolsep{2pt}% <-- added
+        \begin{tabularx}{\linewidth}{*{6}{>{\centering\arraybackslash}X}}\hline
+   \makecell{PCA Components or other}   & n estimators & Accuracy &   execution time  \\ \hline
+                  
+ valu11  & value21& 0.30   &   0.30   \\ 
+  valu12  & value22& 0.3560   &   0.8630   \\ 
+
+  \end{tabularx}
+     
+        \caption{Multinomial Naive Bayes classification report  }
+\end{figure}
+\FloatBarrier
+
+\subsection{On Adult dataset}
+\subsection{multilayer perceptron}
+\textcolor{red}{alejandra}
+\subsubsection{Naive Bayes}
+\textcolor{red}{alejandra}
+\subsubsection{Random forests}
+\textcolor{red}{alejandra}
+
+
+
+
+
+\section{Design Choices}
+
+
+
 \subsection*{Acknowledgments}
 
-Use unnumbered third level headings for the acknowledgments. All acknowledgments
-go at the end of the paper. Do not include acknowledgments in the anonymized
-submission, only in the final paper.
+
 
 \section*{References}
 
